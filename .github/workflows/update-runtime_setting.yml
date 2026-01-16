@@ -33,6 +33,4 @@ jobs:
           author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           add-paths: ./runtime_setting.yaml
           labels: infra,bot
-
-          # Probably replace this with "team-reviewers" property at org level
-          reviewers: jm-janzen
+          team-reviewers: reviewers
