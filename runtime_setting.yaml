@@ -210,6 +210,7 @@ from_data_bamlab: |2
     </div>
 from_data_devlab: |2
     <script>
+      <!-- Meow meow meow meow meow -->
       var lab = 'devlab';
       var url_status = 'https://lobot.cs.queensu.ca/allocationstatus/current.json';
       $.getJSON(url_status, function(data){{
