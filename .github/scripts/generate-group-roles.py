@@ -9,10 +9,10 @@ output_file = os.getenv('OUTPUT_FILE', './group-roles.yaml')
 
 
 def main():
-    users_payload = read_payload(input_file, 'users')
-    users_payload = simplify_users_payload(users_payload)
-    groups_payload = read_payload(input_file, 'groups')
-    groups_payload = simplify_groups_payload(groups_payload)
+    users_payload =read_payload(input_file, 'users')
+    users_payload =simplify_users_payload(users_payload)
+    groups_payload=read_payload(input_file, 'groups')
+    groups_payload=simplify_groups_payload(groups_payload)
     if users_payload is None or groups_payload is None:
         # Maybe one day will have a reason to run this script in "refresh existing"
         print('Need a source payload to run this script -- quitting')
