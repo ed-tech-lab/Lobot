@@ -26,10 +26,10 @@ jobs:
       - name: Check python format
         uses: astral-sh/ruff-action@v3
         with:
-          args: format --check
+          args: format --check --diff
           src: ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check python syntax
         uses: astral-sh/ruff-action@v3
         with:
-          args: check
+          args: check --diff
           src: ${{ steps.changed-files.outputs.all_changed_files }}
