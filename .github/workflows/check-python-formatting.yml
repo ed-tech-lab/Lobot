@@ -26,7 +26,7 @@ jobs:
 
   check_style:
     needs: stage_files
-    if: needs.stage_files.outputs.any_changed_files == 'true'
+    if: needs.stage_files.outputs.any_changed == 'true'
     env:
       CHANGED_FILES: ${{ needs.stage_files.outputs.changed_files }}
     runs-on: ubuntu-latest
