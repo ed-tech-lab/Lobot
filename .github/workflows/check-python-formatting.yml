@@ -22,14 +22,17 @@ jobs:
         run: echo $CHANGED_FILES
 
       - name: Init ruff and print version
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: astral-sh/ruff-action@v3
         with:
           args: --version
       - name: Check python format
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: ruff format --check --diff ${CHANGED_FILES}
       - name: Check python syntax
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: ruff check --diff ${CHANGED_FILES}
