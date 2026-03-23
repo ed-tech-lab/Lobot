@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  check_style:
+  stage_files:
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -21,18 +21,19 @@ jobs:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: echo $CHANGED_FILES
 
+  check_style:
+    if: steps.changed-files.outputs.any_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
       - name: Init ruff and print version
-        if: steps.changed-files.outputs.any_changed == 'true'
         uses: astral-sh/ruff-action@v3
         with:
           args: --version
       - name: Check python format
-        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: ruff format --check --diff ${CHANGED_FILES}
       - name: Check python syntax
-        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: ruff check --diff ${CHANGED_FILES}
