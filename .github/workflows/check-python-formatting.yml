@@ -24,10 +24,12 @@ jobs:
         with:
           args: --version
       - name: Check python format
-        run: ruff format --check
+        uses: astral-sh/ruff-action@v3
         with:
+          args: format --check
           src: $CHANGED_FILES
       - name: Check python syntax
-        run: ruff check
+        uses: astral-sh/ruff-action@v3
         with:
+          args: check
           src: $CHANGED_FILES
