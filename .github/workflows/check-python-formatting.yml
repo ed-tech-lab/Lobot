@@ -10,11 +10,24 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v5
 
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+
+      - name: List changed files
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: echo $CHANGED_FILES
+
       - name: Init ruff and print version
         uses: astral-sh/ruff-action@v3
         with:
           args: --version
       - name: Check python format
         run: ruff format --check
+        with:
+          src: $CHANGED_FILES
       - name: Check python syntax
         run: ruff check
+        with:
+          src: $CHANGED_FILES
