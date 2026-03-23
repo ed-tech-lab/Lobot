@@ -30,7 +30,8 @@ jobs:
         run: echo $CHANGED_FILES
 
   check_style:
-    if: jobs.stage_files.outputs.any_changed_files == 'true'
+    needs: stage_files
+    if: needs.stage_files.outputs.any_changed_files == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Init ruff and print version
@@ -39,9 +40,9 @@ jobs:
           args: --version
       - name: Check python format
         env:
-          CHANGED_FILES: ${{ jobs.stage_files.outputs.changed_files }}
+          CHANGED_FILES: ${{ needs.stage_files.outputs.changed_files }}
         run: ruff format --check --diff ${CHANGED_FILES}
       - name: Check python syntax
         env:
-          CHANGED_FILES: ${{ jobs.stage_files.outputs.changed_files }}
+          CHANGED_FILES: ${{ needs.stage_files.outputs.changed_files }}
         run: ruff check --diff ${CHANGED_FILES}
