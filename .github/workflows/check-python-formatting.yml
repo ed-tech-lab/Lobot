@@ -2,7 +2,7 @@ name: Check Python Formatting
 
 on:
   pull_request:
-    types: [ready_for_review]
+
 jobs:
   check_style:
     runs-on: ubuntu-latest
