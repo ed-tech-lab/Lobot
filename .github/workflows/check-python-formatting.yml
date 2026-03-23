@@ -25,9 +25,15 @@ jobs:
           args: --version
       - name: Check python format
         uses: astral-sh/ruff-action@v3
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         with:
           args: format --check --diff
+          src: $CHANGED_FILES
       - name: Check python syntax
         uses: astral-sh/ruff-action@v3
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         with:
           args: check --diff
+          src: $CHANGED_FILES
